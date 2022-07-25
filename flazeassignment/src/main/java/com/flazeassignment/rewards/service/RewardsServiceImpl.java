@@ -26,7 +26,8 @@ public class RewardsServiceImpl implements RewardsService {
 	public Integer getRewardsForCustomer(String customerId) {
 		List<Transaction> transactions = rewardsRepository.findByCustomerId(customerId);
 		if (transactions == null) {
-			logger.error("Customer Id: " + customerId + " not retrieved or no transactions");
+			String errorMessage = "Customer Id: " + customerId + " not retrieved or no transactions";
+			logger.error(errorMessage);
 			return null;
 		}
 		Integer threeMonthsRewards = getRewardsForLastThreeMonths(transactions);
@@ -34,7 +35,7 @@ public class RewardsServiceImpl implements RewardsService {
 		return threeMonthsRewards;
 	}
 	
-	private Integer getRewardsForLastThreeMonths(List<Transaction> transactions) {
+	public Integer getRewardsForLastThreeMonths(List<Transaction> transactions) {
 		Integer rewards = 0;
 		Date threeMonthsBefore = getThreeMonthsBefore();
 		BigDecimal lowerLimit = new BigDecimal(50.00);

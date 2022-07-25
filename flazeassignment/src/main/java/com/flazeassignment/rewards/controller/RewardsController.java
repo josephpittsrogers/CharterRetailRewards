@@ -35,13 +35,13 @@ public class RewardsController {
 		  return "The number of rewards for customer: " + customerId + " is " + rewards;
 	  }
    
- @ExceptionHandler(IOException.class)
- public ModelAndView handleIOException(IOException ex) {
-	 logger.error("Controller IOError" + ex.getMessage());
-     ModelAndView model = new ModelAndView("Controller IOError");
-  
-     model.addObject("exception", ex.getMessage());
-  
-     return model;
- }
+	 @ExceptionHandler(IOException.class)
+	 public ModelAndView handleIOException(IOException ex) {
+		 logger.error("Controller IOError" + ex.getMessage());
+	     ModelAndView model = new ModelAndView("Controller IOError");
+	  
+	     model.addObject("exception", ex.getMessage());
+	  
+	     return model;
+	 }
 }
