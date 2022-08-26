@@ -10,16 +10,15 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.charter.retail.rewards.model.Transaction;
 import com.charter.retail.rewards.repository.RewardsRepository;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
 @Service
 public class RewardsServiceImpl implements RewardsService {
 	
-	private static final Logger logger = Logger.getLogger(RewardsServiceImpl.class);
+    Logger logger = org.slf4j.LoggerFactory.getLogger(RewardsServiceImpl.class);
 	
 	public static final String EMPTY_STRING = "";
 	

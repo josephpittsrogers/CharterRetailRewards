@@ -1,7 +1,6 @@
 package com.charter.retail.rewards.config;
 
 import lombok.Data;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,4 +20,5 @@ public class SwaggerConfig {
 				.apis(RequestHandlerSelectors.basePackage("com.charter.retail.rewards.controller"))
 				.build();
 	}
+	
 }

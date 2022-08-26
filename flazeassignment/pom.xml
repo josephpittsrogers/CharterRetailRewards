@@ -80,11 +80,25 @@
             <artifactId>spring-plugin-core</artifactId>
             <version>2.0.0.RELEASE</version>
         </dependency>
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<!-- From Log4j 1.x to SLF4J -->
 		<dependency>
-		    <groupId>log4j</groupId>
-		    <artifactId>log4j</artifactId>
-		    <version>1.2.17</version>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>log4j-over-slf4j</artifactId>
+		    <version>2.0.0-alpha5</version>
+		</dependency>
+		<!-- From SLF4J 1.8+ to Log4j 2.x API -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j18-impl</artifactId>
+		    <version>2.17.1</version>
+		    <scope>runtime</scope>
+		</dependency>
+		<!-- From Log4j 2.x API to Log4j 2.x Core -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.17.1</version>
+		    <scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
