@@ -1,7 +1,9 @@
-package com.flazeassignment.rewards.repository;
+package com.charter.retail.rewards.repository;
 import org.springframework.data.repository.CrudRepository;
+
+import com.charter.retail.rewards.model.Transaction;
+
 import java.util.List;
-import com.flazeassignment.rewards.model.Transaction;
 
 public interface RewardsRepository extends CrudRepository<Transaction, Integer> {
    

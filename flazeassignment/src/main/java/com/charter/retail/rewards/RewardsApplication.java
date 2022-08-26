@@ -1,13 +1,13 @@
-package com.flazeassignment.rewards;
+package com.charter.retail.rewards;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FlazeAssignmentApplication {
+public class RewardsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlazeAssignmentApplication.class, args);
+		SpringApplication.run(RewardsApplication.class, args);
 	}
 
 }

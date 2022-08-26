@@ -1,4 +1,4 @@
-package com.flazeassignment.rewards.model;
+package com.charter.retail.rewards.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
