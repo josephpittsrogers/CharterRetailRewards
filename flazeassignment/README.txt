@@ -31,5 +31,15 @@ returns { { customer: cust2 month: June rewards:310.22 }{ customer: cust2 month:
 The transactions are filtered to eliminate any transaction < $50.00 and older than 3 months
 The expected test results eliminate on transaction older than 3 months and one not > $50 for cust1.
 
+Swagger URLs
+http://localhost:8080/swagger-ui/   Api Documentaton and test rewards-controller with curl
+http://localhost:8080/v2/api-docs   Json Api Documentation also link in swagger-ui
+
+Actuator URLs
+http://localhost:8080/actuator/health
+http://localhost:8080/actuator/info
+
+
+
 		
 		
