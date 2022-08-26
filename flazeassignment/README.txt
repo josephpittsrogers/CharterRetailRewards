@@ -32,6 +32,7 @@ The transactions are filtered to eliminate any transaction < $50.00 and older th
 The expected test results eliminate on transaction older than 3 months and one not > $50 for cust1.
 
 Swagger URLs
+All of the above testing can be done via swagger-ui and testing the endoints with the appropriate parameters.  The results would be returned in the response body.
 http://localhost:8080/swagger-ui/   Api Documentaton and test rewards-controller with curl
 http://localhost:8080/v2/api-docs   Json Api Documentation also link in swagger-ui
 
