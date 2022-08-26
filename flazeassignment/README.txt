@@ -1,7 +1,7 @@
 The purpose of this web service is to display calculate the rewards for a particular customer
 last 3 months.
 
-It is a maven project and the maven files are in the git project.
+It is a Maven project, and the Maven POM is in the GIT project, Rewards.
 		
 The h2 data base that is used for this unit testing is defined in the src/main/resources/data.sql file;
 it drops the transaction table if necessary, creates the transaction table, and inserts 3 transactions 

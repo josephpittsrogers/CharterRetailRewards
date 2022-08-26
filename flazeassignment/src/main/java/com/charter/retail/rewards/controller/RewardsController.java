@@ -1,6 +1,5 @@
 package com.charter.retail.rewards.controller;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,8 @@ import org.apache.log4j.Logger;
 @RestController
 @RequestMapping(path="/rewards")
 public class RewardsController {
+	
+	public static String INTERNAL_SERVER_ERROR = "Internal Server Error";
 	
 	private static final Logger logger = Logger.getLogger(RewardsController.class);
 
@@ -39,9 +40,9 @@ public class RewardsController {
     	 @ExceptionHandler(Exception.class)
     	 public ModelAndView handleException(Exception ex) {
     		 logger.error("Controller Error" + ex.getMessage());
-    	     ModelAndView model = new ModelAndView("Controller Error");
+    	     ModelAndView model = new ModelAndView(INTERNAL_SERVER_ERROR);
     	  
-    	     model.addObject("exception", ex.getMessage());
+    	     model.addObject("Exception", ex.getMessage());
     	  
     	     return model;
     	 }
