@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.charter.retail.rewards.model.Transaction;
 import com.charter.retail.rewards.repository.RewardsRepository;
-
+import lombok.Setter;
 import org.slf4j.Logger;
 
 @Service
+@Setter
 public class RewardsServiceImpl implements RewardsService {
 	
     Logger logger = org.slf4j.LoggerFactory.getLogger(RewardsServiceImpl.class);

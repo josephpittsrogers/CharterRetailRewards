@@ -1,14 +1,15 @@
 package com.charter.retail.rewards.controller;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+
 @ControllerAdvice
 public class ControllerExceptionHandler {	
 	 public static String INTERNAL_SERVER_ERROR = "Internal Server Error";	
-     Logger logger = org.slf4j.LoggerFactory.getLogger(ControllerExceptionHandler.class);
+     Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 	   
 	 @ExceptionHandler(Exception.class)
 	 public ModelAndView handleException(Exception ex) {
