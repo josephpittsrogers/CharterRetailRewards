@@ -1,20 +1,17 @@
 package com.charter.retail.rewards.service;
-import static org.junit.Assert.assertTrue;
 
+import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.charter.retail.rewards.model.Transaction;
 import com.charter.retail.rewards.repository.RewardsRepository;
-
 import static org.mockito.Mockito.when;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -23,8 +20,7 @@ import org.mockito.Mock;
 @RunWith(MockitoJUnitRunner.class)
 public class RewardsServiceTest {
 	
-	  private RewardsService rewardsService = new RewardsServiceImpl();
-	  
+	  private RewardsService rewardsService = new RewardsServiceImpl();	  
 	  public static List<Transaction> cust1Transactions = new ArrayList<Transaction>();
 	  public static List<Transaction> cust2Transactions = new ArrayList<Transaction>();
 	  public static List<Transaction> cust3Transactions = new ArrayList<Transaction>();	  

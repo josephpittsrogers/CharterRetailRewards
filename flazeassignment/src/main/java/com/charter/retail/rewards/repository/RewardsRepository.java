@@ -6,6 +6,14 @@ import com.charter.retail.rewards.model.Transaction;
 
 import java.util.List;
 
+/**
+* Rewards Repository
+* 
+* Extends the Spring CrudRepository that only requires interfaces describe CRUD and specific customized inquiries.  Spring actually 
+* creates the implementations.
+* @author JoeRogers
+* 
+*/
 @Repository
 public interface RewardsRepository extends CrudRepository<Transaction, Integer> {
    

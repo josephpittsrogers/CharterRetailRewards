@@ -3,28 +3,17 @@ package com.charter.retail.rewards.controller;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
-
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.slf4j.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import com.charter.retail.rewards.model.Transaction;
 import com.charter.retail.rewards.service.RewardsService;
-import com.charter.retail.rewards.service.RewardsServiceImpl;
-
-
-
-
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +41,6 @@ public class RewardsControllerTest {
 	    @Test
 	    public void testGetAllRewards () 
 	    {
-	    	rewardsController.setRewardsService(mockRewardsService);
 	    	String customerId = "cust1";
 			BigDecimal threeMonthsRewards = new BigDecimal(80.45);
 			String rewards = "{ customer: " + customerId + " rewards: " + threeMonthsRewards + " }";
@@ -70,9 +58,7 @@ public class RewardsControllerTest {
 	    @Test
 	    public void testGetRewardsByMonth () 
 	    {
-	    	rewardsController.setRewardsService(mockRewardsService);
 	    	String customerId = "cust2";
-			BigDecimal threeMonthsRewards = new BigDecimal(80.45);
 			String rewards = "{ { customer: cust2 month: June rewards:310.22 }{ customer: cust2 month: July rewards:1.45 }{ customer: cust2 month: August rewards:41.43 } }";
 			when(mockRewardsService.getRewardsForCustomerByMonth(customerId)).thenReturn(rewards);
 			try {

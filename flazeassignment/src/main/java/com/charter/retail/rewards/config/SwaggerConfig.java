@@ -8,7 +8,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
+/**
+* Swagger Configuration  
+* 
+* Creates a Docket Bean and established te controller package as the base package for /swagger-ui/
+* @author JoeRogers
+* 
+*/
 @Configuration
 @Data
 @EnableSwagger2

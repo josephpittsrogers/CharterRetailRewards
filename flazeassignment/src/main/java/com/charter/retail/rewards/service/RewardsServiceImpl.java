@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.charter.retail.rewards.model.Transaction;
@@ -15,8 +14,16 @@ import com.charter.retail.rewards.repository.RewardsRepository;
 import lombok.Setter;
 import org.slf4j.Logger;
 
-@Service
+/**
+* Rewards Service Implementation
+* 
+* Implements the Rewards Service Interface.  It performs the business activities required to generate the customer monthly and total rewards
+* for the last 3 months.
+* @author JoeRogers
+* 
+*/
 @Setter
+@Service
 public class RewardsServiceImpl implements RewardsService {
 	
     Logger logger = org.slf4j.LoggerFactory.getLogger(RewardsServiceImpl.class);
@@ -26,6 +33,10 @@ public class RewardsServiceImpl implements RewardsService {
 	@Autowired
 	private RewardsRepository rewardsRepository;
 
+    /*
+     *   The purpose of this method is to return the total reward points for a customer for the 
+     *   last 3 months.
+     */
 	public String getRewardsForCustomer(String customerId) {
 		List<Transaction> transactions = rewardsRepository.findByCustomerId(customerId);
 		if (transactions == null) {
@@ -38,6 +49,10 @@ public class RewardsServiceImpl implements RewardsService {
 		return rewards;
 	}
 
+    /*
+     *   The purpose of this method is to return the monthly breakdown of reward points for a customer for the 
+     *   last 3 months.
+     */
 	public String getRewardsForCustomerByMonth(String customerId) {
 		List<Transaction> transactions = rewardsRepository.findByCustomerId(customerId);
 		if (transactions == null) {
