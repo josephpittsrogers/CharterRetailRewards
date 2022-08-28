@@ -1,98 +1,89 @@
 package com.charter.retail.rewards.controller;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.charter.retail.rewards.model.Transaction;
-import com.charter.retail.rewards.repository.RewardsRepository;
 import com.charter.retail.rewards.service.RewardsService;
+import com.charter.retail.rewards.service.RewardsServiceImpl;
 
-import static org.junit.Assert.assertEquals;
+
+
+
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest
+@RunWith(SpringRunner.class)
+@WebMvcTest(RewardsController.class)
 public class RewardsControllerTest {
  
-	private List<Transaction> transactions;
-	
-	@Autowired
-	private MockMvc mockMvc;
-	
-	private Logger logger;
-	
-    @InjectMocks
-    RewardsController rewardsController;
-     
-    @Mock
-    RewardsService rewardsService;
+	  public static List<Transaction> cust1Transactions = new ArrayList<Transaction>();
+	  public static List<Transaction> cust2Transactions = new ArrayList<Transaction>();
+	  public static List<Transaction> cust3Transactions = new ArrayList<Transaction>();	  
+	  public static Logger logger;	
+		
+	  @Autowired
+	  private MockMvc mockMvc;
+		
+	  @Autowired
+	  private RewardsController rewardsController;
 	     
-    @Before
-    public void getTransactionList() {
-    	transactions = new ArrayList<Transaction>();
-    	Transaction transaction = new Transaction();
-    	transaction.setId(1);
-    	transaction.setCustomerId("cust2");
-    	transaction.setTransactionAmount(new BigDecimal(123.45));
-    	transaction.setTransactionDate(Calendar.getInstance().getTime());
-    	transactions.add(transaction);
-        logger = LoggerFactory.getLogger(RewardsControllerTest.class);
-        logger.info("@Before: executedBeforeEach to test transaction list");
-    }
+	  @MockBean
+	  private RewardsService mockRewardsService;
+	      
 
-    
+	    @Test
+	    public void testGetAllRewards () 
+	    {
+	    	rewardsController.setRewardsService(mockRewardsService);
+	    	String customerId = "cust1";
+			BigDecimal threeMonthsRewards = new BigDecimal(80.45);
+			String rewards = "{ customer: " + customerId + " rewards: " + threeMonthsRewards + " }";
+			when(mockRewardsService.getRewardsForCustomer(customerId)).thenReturn(rewards);
+			try {
+	        mockMvc.perform(get("/rewards/getAllRewards/{customerId}", customerId)
+	        		.contentType("application/text")) .andExpect(status().isOk());
+			} catch (Exception e) {
+				logger.error("mockMvc Exception: " + e.getMessage());
+			}
+	        String response = rewardsController.getAllRewards(customerId);
+	        assertSame(rewards, response);
+	    }
 
-    @Test
-    public void testGetAllRewards () 
-    {
-    	String customerId = "cust2";
-    	String month = "August";
-    	String serviceRtn =  "{ customer: cust2 rewards: 353.10 }";
-    	MockHttpServletRequest request = new MockHttpServletRequest();
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        // returned from service { customer: cust2 rewards: 353.10}
-//        Mockito.when(rewardsService.getRewardsForCustomer(customerId).thenReturn(transactions);
-		try {
-        mockMvc.perform(get("/rewards/getAllRewards/{customerId}", customerId)
-        		.contentType("application/text")) .andExpect(status().isOk());
-		} catch (Exception e) {
-			logger.error("mockMvc Exception: " + e.getMessage());
-		}
-        String responseEntity = rewardsController.getAllRewards(customerId);
-	         int i = 0;
-    }
+	    @Test
+	    public void testGetRewardsByMonth () 
+	    {
+	    	rewardsController.setRewardsService(mockRewardsService);
+	    	String customerId = "cust2";
+			BigDecimal threeMonthsRewards = new BigDecimal(80.45);
+			String rewards = "{ { customer: cust2 month: June rewards:310.22 }{ customer: cust2 month: July rewards:1.45 }{ customer: cust2 month: August rewards:41.43 } }";
+			when(mockRewardsService.getRewardsForCustomerByMonth(customerId)).thenReturn(rewards);
+			try {
+	        mockMvc.perform(get("/rewards/getRewardsByMonth/{customerId}", customerId)
+	        		.contentType("application/text")) .andExpect(status().isOk());
+			} catch (Exception e) {
+				logger.error("mockMvc Exception: " + e.getMessage());
+			}
+	        String response = rewardsController.getRewardsByMonth(customerId);
+	        assertSame(rewards, response);
+	    }
 
 }
  	     

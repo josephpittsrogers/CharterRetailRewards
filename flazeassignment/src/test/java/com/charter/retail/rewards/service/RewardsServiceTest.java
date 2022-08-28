@@ -1,5 +1,5 @@
 package com.charter.retail.rewards.service;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -62,24 +62,24 @@ public class RewardsServiceTest {
 		  String customerId = cust1Transactions.get(0).getCustomerId();
 		  when(mockRewardsRepository.findByCustomerId(customerId)).thenReturn(cust1Transactions);
 		  rewardsService.setRewardsRepository(mockRewardsRepository);
-		  BigDecimal rewards = rewardsService.getRewardsForCustomer(customerId);
-		  assertEquals(new BigDecimal(90.00), rewards);
+		  String rewards = rewardsService.getRewardsForCustomer(customerId);
+		  assertTrue(rewards.contains("rewards: 90"));
 	  }
 	  
 	  @Test public void testAbove50() {
 		  String customerId = cust2Transactions.get(0).getCustomerId();
 		  when(mockRewardsRepository.findByCustomerId(customerId)).thenReturn(cust2Transactions);
 		  rewardsService.setRewardsRepository(mockRewardsRepository);
-		  BigDecimal rewards = rewardsService.getRewardsForCustomer(customerId);
-		  assertEquals(new BigDecimal(40.00), rewards);
+		  String rewards = rewardsService.getRewardsForCustomer(customerId);
+		  assertTrue(rewards.contains("rewards: 40"));
 	  }
 	  
 	  @Test public void testBelow50() {
 		  String customerId = cust3Transactions.get(0).getCustomerId();
 		  when(mockRewardsRepository.findByCustomerId(customerId)).thenReturn(cust3Transactions);
 		  rewardsService.setRewardsRepository(mockRewardsRepository);
-		  BigDecimal rewards = rewardsService.getRewardsForCustomer(customerId);
-		  assertEquals(new BigDecimal(0.00), rewards);
+		  String rewards = rewardsService.getRewardsForCustomer(customerId);
+		  assertTrue(rewards.contains("rewards: 0"));
 	  }
 	 
 }

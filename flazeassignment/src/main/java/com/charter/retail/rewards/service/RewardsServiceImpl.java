@@ -26,7 +26,7 @@ public class RewardsServiceImpl implements RewardsService {
 	@Autowired
 	private RewardsRepository rewardsRepository;
 
-	public BigDecimal getRewardsForCustomer(String customerId) {
+	public String getRewardsForCustomer(String customerId) {
 		List<Transaction> transactions = rewardsRepository.findByCustomerId(customerId);
 		if (transactions == null) {
 			String errorMessage = "Customer Id: " + customerId + " not retrieved or no transactions";
@@ -34,8 +34,8 @@ public class RewardsServiceImpl implements RewardsService {
 			return null;
 		}
 		BigDecimal threeMonthsRewards = getRewardsForLastThreeMonths(transactions);
-		
-		return threeMonthsRewards;
+		String rewards = "{ customer: " + customerId + " rewards: " + threeMonthsRewards + " }";
+		return rewards;
 	}
 
 	public String getRewardsForCustomerByMonth(String customerId) {
